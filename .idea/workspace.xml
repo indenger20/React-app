@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="800cfbb0-8152-4a0c-ac43-36b19dd776fb" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/navigation/Navigation.js" afterPath="$PROJECT_DIR$/src/components/navigation/Navigation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/user/User.js" afterPath="$PROJECT_DIR$/src/components/user/User.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/App.js" afterPath="$PROJECT_DIR$/src/containers/App.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/main/main.js" afterPath="$PROJECT_DIR$/src/containers/main/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/other.js" afterPath="$PROJECT_DIR$/src/reducers/other.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/comments/Comments.css" afterPath="$PROJECT_DIR$/src/components/comments/Comments.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/comments/Comments.scss" afterPath="$PROJECT_DIR$/src/components/comments/Comments.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/write/Write.js" afterPath="$PROJECT_DIR$/src/components/write/Write.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,7 +17,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/App.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="510">
@@ -41,6 +37,28 @@
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Write.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/write/Write.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="44" column="5" lean-forward="true" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
+              <folding>
+                <element signature="n#!!block;n#getTime#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Comments.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/comments/Comments.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="729">
+              <caret line="113" column="26" lean-forward="false" selection-start-line="113" selection-start-column="26" selection-end-line="113" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -131,7 +149,6 @@
         <option value="$PROJECT_DIR$/src/components/info/Info.js" />
         <option value="$PROJECT_DIR$/src/components/info/Info.scss" />
         <option value="$PROJECT_DIR$/src/assets/styles/variables.scss" />
-        <option value="$PROJECT_DIR$/src/components/comments/Comments.scss" />
         <option value="$PROJECT_DIR$/src/assets/styles/buttons.scss" />
         <option value="$PROJECT_DIR$/src/components/write/Write.scss" />
         <option value="$PROJECT_DIR$/src/actions/actionYear.js" />
@@ -142,7 +159,6 @@
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/assets/styles/main.scss" />
         <option value="$PROJECT_DIR$/src/reducers/info.js" />
-        <option value="$PROJECT_DIR$/src/components/write/Write.js" />
         <option value="$PROJECT_DIR$/src/pages/Comments/Comments.js" />
         <option value="$PROJECT_DIR$/src/components/navigation/navigation.scss" />
         <option value="$PROJECT_DIR$/src/components/navigation/navigation.js" />
@@ -158,6 +174,8 @@
         <option value="$PROJECT_DIR$/src/components/user/User.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/components/comments/Comments.scss" />
+        <option value="$PROJECT_DIR$/src/components/write/Write.js" />
       </list>
     </option>
   </component>
@@ -296,6 +314,10 @@
               <option name="myItemId" value="components" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="write" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -312,10 +334,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="user" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -444,18 +462,17 @@
       <workItem from="1510817541848" duration="13619000" />
       <workItem from="1510917645901" duration="11000" />
       <workItem from="1511163751937" duration="656000" />
-      <workItem from="1511258296781" duration="8934000" />
+      <workItem from="1511258296781" duration="9968000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57087000" />
+    <option name="totallyTimeSpent" value="58121000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1924" height="1056" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2494759" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2494759" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -549,13 +566,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/comments/Comments.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/assets/styles/buttons.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -588,14 +598,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/User/User.scss" />
     <entry file="file://$PROJECT_DIR$/src/pages/User/User.js" />
-    <entry file="file://$PROJECT_DIR$/src/components/write/Write.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="45" column="20" lean-forward="false" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/Comments/Comments.js" />
     <entry file="file://$PROJECT_DIR$/src/components/comments/Comments.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -828,6 +830,24 @@
           <caret line="30" column="2" lean-forward="false" selection-start-line="30" selection-start-column="2" selection-end-line="30" selection-end-column="2" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/comments/Comments.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="729">
+          <caret line="113" column="26" lean-forward="false" selection-start-line="113" selection-start-column="26" selection-end-line="113" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/write/Write.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="44" column="5" lean-forward="true" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
+          <folding>
+            <element signature="n#!!block;n#getTime#0" expanded="false" />
           </folding>
         </state>
       </provider>

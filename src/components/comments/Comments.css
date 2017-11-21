@@ -103,4 +103,5 @@
 .comments-all__text {
   display: block;
   color: #333333;
-  font: 400 14px/19px "Arial"; }
+  font: 400 14px/19px "Arial";
+  white-space: pre-line; }

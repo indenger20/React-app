@@ -40,39 +40,32 @@ export default class Write extends React.Component {
         this.state = {
             value: '',
             error: false
-        }
+        };
+        this.nameUser = this.props.nameUser || 'Unknown';
     }
 
     handleClick(e) {
         e.preventDefault();
-        let val = this.state.value.replace(/(?:\r\n|\r|\n)/g, '<br />');
+        let val = this.state.value.replace(/(?:\r\n|\r|\n)/g, '\n');
         if(val) {
             this.setState({
                 error: false
-            })
-            let name = window.prompt('Ведите свое имя');
+            });
             let time = getTime();
-            if(name) {
-                let obj = {
-                    'text': val,
-                    'name': name,
-                    'time': time
-                };
-
-                this.props.addComment(obj);
-                this.setState({
-                    value: ''
-                })
-            }else {
-                window.alert('Нужно ввести имя');
-            }
-
+            let obj = {
+                'text': val,
+                'name': this.nameUser,
+                'time': time
+            };
+            this.props.addComment(obj);
+            this.setState({
+                value: ''
+            });
         }else {
             this.setState({
                 error: true
-            })
+            });
         }
-
     }
 
     handleChange(e) {
