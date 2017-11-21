@@ -12,7 +12,7 @@ class Main extends React.Component {
 
             <div className="main">
                 <div className="main__wrap">
-                    <User />
+                    <User infoUser={this.props.infoUser} />
                     <Info data={this.props.InfoData} />
                     <CommentsView data={this.props.CommentData} />
                 </div>

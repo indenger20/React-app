@@ -3,11 +3,11 @@ const initialState = {
     nav: [
         {
             "text": "Home",
-            "path": "/"
+            "path": "/react-app/"
         },
         {
             "text": "About",
-            "path": "/about"
+            "path": "/react-app/about"
         }
     ]
 }

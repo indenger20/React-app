@@ -11,6 +11,7 @@ import  setCommentAction from '../actions/actionComment';
 
 const history = createBrowserHistory();
 
+const MYPATH = 'react-app';
 
 function mapStateToProps(state) {
     return {
@@ -43,7 +44,8 @@ class App extends React.Component {
                         InfoData={this.props.InfoData}
                         CommentData={this.props.CommentData}
                         setCommentFn={this.props.setCommentFn}
-                        exact path="/" component={Main}
+                        infoUser={this.props.infoUser}
+                        exact path="/react-app/" component={Main}
                     />
                 </div>
             </BrowserRouter>

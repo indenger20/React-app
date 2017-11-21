@@ -11,9 +11,9 @@ export default class Navigation extends React.Component {
             <div className="nav">
                 <ul className="nav__list">
                     {
-                        this.props.data.map(function (el) {
+                        this.props.data.map(function (el, i) {
                             return (
-                                <li className="nav__item">
+                                <li className="nav__item" key={i}>
                                     <Link className="nav__link" to={el.path}>{el.text}</Link>
                                 </li>
                             )
