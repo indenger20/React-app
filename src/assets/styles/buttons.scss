@@ -1,0 +1,19 @@
+@import "./component.scss";
+.btn {
+  background: #fdd639;
+  color: $dark;
+  font: 16px $font-PT;
+  display: block;
+  padding: 11px 20px 12px;
+  text-align: center;
+  width: 100%;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  transition: all .3s;
+  border-radius: 30px;
+  &:hover {
+    background: $dark;
+    color: #fff;
+  }
+}

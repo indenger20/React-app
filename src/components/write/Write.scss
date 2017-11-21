@@ -1,0 +1,29 @@
+@import "../../assets/styles/component.scss";
+
+.write {
+  background: #f2f2f2;
+  padding: 30px 0;
+  position: relative;
+  &:before {
+    @include before-img(5000px, 100%);
+    background: #f2f2f2;
+    top: 0;
+    left: -5000px;
+  }
+  &:after {
+    @include before-img(5000px, 100%);
+    background: #f2f2f2;
+    top: 0;
+    right: -5000px;
+  }
+
+  &__input {
+    margin-bottom: 20px;
+  }
+
+  &__btn {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+}

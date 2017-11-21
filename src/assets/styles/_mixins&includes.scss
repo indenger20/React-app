@@ -1,0 +1,145 @@
+//----------------------------------------------------//
+// Mixins & Includes                                  //
+//----------------------------------------------------//
+@mixin notext {
+	overflow: hidden;
+	text-indent: -9999px;
+}
+
+.clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.centered	{ 
+	display: table;
+	width: 100%;
+	height: 100%; 
+	> * {
+		display: table-cell;
+		text-align: center;
+		vertical-align: middle;
+	}
+}
+
+// PLACEHOLDER MIXIN
+@mixin placeholderColor($input-text-color) {
+	&::-webkit-input-placeholder {color: $input-text-color;}
+	&:-moz-placeholder {color: $input-text-color; opacity: 1;}
+	&::-moz-placeholder {color: $input-text-color; opacity: 1;}
+	&:-ms-input-placeholder {color: $input-text-color;}
+	&:focus:-moz-placeholder {color:transparent; opacity: 1;}
+	&:focus::-moz-placeholder {color:transparent; opacity: 1;}
+	&:focus::-webkit-input-placeholder {color:transparent;}
+	&:focus:-ms-input-placeholder {color:transparent;}
+	&:focus::placeholder {color:transparent;}
+}
+
+@mixin clearfix {
+	&:after {
+		content: " ";
+		display: block;
+		clear: both;
+	}
+}
+
+// Clear select without default button
+@mixin clearSelect {
+	-webkit-appearance: none;
+	-moz-appearance:    none;
+	appearance:         none;   
+	-webkit-border-radius: 0; 
+	-moz-border-radius: 0; 
+	border-radius: 0;
+}
+
+//elements get appended with "__" and the $name
+@mixin e($name) {
+	@at-root   #{&}__#{$name} {
+		@content;
+	}
+}
+
+//modifiers get appended with "--" and the $name
+@mixin m($name) {
+	@at-root   #{&}--#{$name} {
+		@content;
+	}
+}
+
+ @mixin b($point) {
+	@if $point == desktop {
+		@media (max-width: 1366px) and (min-width:1024px) { @content ; }
+	}
+	@else if $point == tablet {
+		@media (max-width: 1000px) { @content ; }
+	}
+	@else if $point == phablet {
+		@media (min-width: 37.5em)  { @content ; }
+	}
+	@else if $point == mobile {
+		@media (max-width: 767px)  { @content ; }
+	}
+	@else if $point == mobile3x {
+		@media only screen and (-webkit-min-device-pixel-ratio: 3), only screen and (min-resolution: 3dppx), only screen and (min-resolution: 350dpi) { 
+			@content ;
+		}
+	}
+	@else {
+		@media (max-width: $point + 'px')  { @content ; }
+	}
+}
+
+@mixin ie() {
+	@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+  	@content ;
+	}
+}
+
+@mixin before-img($width, $height) {
+	content: '';
+	display: block;
+	position: absolute;
+	width: $width;
+	height: $height;
+}
+
+//----------------------------------------------------//
+// REM FONT_SIZE WITH FALLBACK 												//
+//----------------------------------------------------//
+// USAGE:
+// p {
+//   @include font-size(14px)
+// }
+
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+
+@mixin gradient($top, $bottom) {
+   background: $top;
+   background: -moz-linear-gradient(top,  $top 0%, $bottom 100%);
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom));
+   background: -webkit-linear-gradient(top,  $top 0%,$bottom 100%); 
+   background: -o-linear-gradient(top,  $top 0%,$bottom 100%); 
+   background: -ms-linear-gradient(top,  $top 0%,$bottom 100%); 
+   background: linear-gradient(to bottom,  $top 0%,$bottom 100%);
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$top}', endColorstr='#{$bottom} ',GradientType=0 );
+}
+
+
+@mixin textCut($col, $height) {
+  display: -webkit-box;
+  -webkit-line-clamp: $col;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-height: $height;
+}

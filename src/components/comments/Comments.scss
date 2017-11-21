@@ -1,0 +1,116 @@
+@import "../../assets/styles/component.scss";
+
+.comments {
+  padding-bottom: 20px;
+}
+
+.comments-last {
+  @include clearfix;
+  font-size: 0;
+  padding-bottom: 12px;
+
+  &__left {
+    float: left;
+  }
+
+  &__right {
+    float: right;
+  }
+
+  &__title {
+    display: inline-block;
+    color: $dark;
+    font: 700 16px $font;
+    margin-right: 9px;
+  }
+
+  &__all {
+    display: inline-block;
+    color: $blue;
+    font: 400 14px $font;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__info {
+    display: inline-block;
+    vertical-align: middle;
+    color: $dark;
+    font: 400 12px/1 $font;
+    margin-left: 15px;
+  }
+
+  &__ico {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+  }
+
+  &__count {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+
+
+}
+
+.comments-all {
+
+  &__item {
+    padding-bottom: 17px;
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+
+  &__top {
+    padding-bottom:10px;
+  }
+
+  &__name {
+    display: inline-block;
+    color: $dark;
+    font: 700 14px $font;
+    margin-right: 10px;
+  }
+
+  &__time {
+    display: inline-block;
+    font: 400 11px $font;
+    color: $gray2;
+  }
+
+  &__main {
+    padding: 13px 18px;
+    background: #f2fbff;
+    border: 1px solid #cfcfcf;
+    position: relative;
+    box-shadow: 0 2px 19px -6px rgba(0,0,0,.5);
+    &:before {
+      @include before-img(0,0);
+      border: 9px solid transparent;
+      border-bottom-color: #cfcfcf;
+      border-left-width: 0;
+      top: -18px;
+      left: 25px;
+    }
+    &:after {
+      @include before-img(0,0);
+      border: 9px solid transparent;
+      border-bottom-color: #f2fbff;
+      border-left-width: 0;
+      top: -15px;
+      left: 26px;
+    }
+  }
+
+  &__text {
+    display: block;
+    color: $dark;
+    font: 400 14px/19px $font;
+  }
+
+}
