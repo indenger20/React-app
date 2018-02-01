@@ -49,8 +49,9 @@ export default function userInfo(state = initialState, action) {
         case 'ADD_COMMENT':
             let newCommentData = state.CommentData.slice();
             newCommentData[newCommentData.length] = action.payload;
-            return {...state, CommentData: newCommentData};
-
+            return { ...state, CommentData: newCommentData };
+        case 'SAVE_INFO_USER':
+            return { ...state,  infoUser: action.payload};
         default:
             return state;
     }

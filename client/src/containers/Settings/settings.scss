@@ -1,0 +1,40 @@
+.settings {
+    display: block;
+    padding: 50px 0 0;
+
+    &__form {
+
+    }
+
+    &__row {
+        margin-bottom: 15px;
+        padding-right: 30px;
+        position: relative;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    label {
+        display: block;
+        font-size: 16px;
+        margin: 0;
+    }
+
+    &__edit {
+        color: red;
+        font-size: 14px;
+        position: absolute;
+        right: 0;
+        top: 2px;
+    }
+
+    &__save {
+        color: green;
+        font-size: 14px;
+        position: absolute;
+        right: 0;
+        top: 6px;
+    }
+
+}

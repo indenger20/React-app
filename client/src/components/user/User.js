@@ -6,7 +6,6 @@ import UserPhoto from '../../assets/images/users/user-1.png';
 export default class User extends React.Component {
 
     render() {
-        console.log(this.props)
         return(
             <div className="user">
                 <div className="user__image">

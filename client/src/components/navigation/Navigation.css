@@ -33,6 +33,9 @@
     border-bottom: 1px solid transparent;
     transition: all .3s; }
     .nav__link:hover {
-      border-color: #333333; }
+      border-color: #333333;
+      text-decoration: none; }
+    .nav__link:focus {
+      text-decoration: none; }
     .nav__link--active {
       font-weight: 700; }

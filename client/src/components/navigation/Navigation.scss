@@ -26,6 +26,10 @@
     transition: all .3s;
     &:hover {
       border-color: $dark;
+      text-decoration: none;
+    }
+    &:focus {
+      text-decoration: none;
     }
     &--active {
       font-weight: 700;
