@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 function search(query, cb) {
-    return fetch(`/react-app/api/auth?q=${query}`, {
+    return fetch(`/api/auth?q=${query}`, {
         accept: "application/json"
     })
         .then(checkStatus)

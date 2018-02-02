@@ -43,15 +43,15 @@ class App extends React.Component {
                     <Navigation data={this.props.navList} />
 
                     <PropsRoute
-                        exact path="/react-app/" component={Main}
+                        exact path="/" component={Main}
                     />
-                    <PropsRoute path="/react-app/about" component={About} />
-                    <PropsRoute path="/react-app/settings" component={Settings} />
+                    <PropsRoute path="/about" component={About} />
+                    <PropsRoute path="/settings" component={Settings} />
                     <PropsRoute
                         auth={this.props.auth}
                         login={this.props.authLogin}
                         router={history}
-                        path="/react-app/login" component={LoginPage} />
+                        path="/login" component={LoginPage} />
                 </div>
             </BrowserRouter>
         )

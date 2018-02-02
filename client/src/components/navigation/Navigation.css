@@ -16,7 +16,8 @@
   padding: 16px 0 8px;
   border-bottom: 1px solid #cccccc;
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+  align-items: center; }
   .nav__list {
     display: block;
     padding: 0;

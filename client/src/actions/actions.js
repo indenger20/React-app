@@ -1,20 +1,22 @@
+import * as ActionTypes from './actionTypes';
+
 export const addCommentAction = (comment) => {
     return {
-        type: "ADD_COMMENT",
+        type: ActionTypes.ADD_COMMENT,
         payload: comment
     }
 }
 
 export const actionLogin = (login) => {
     return {
-        type: "CHECK_AUTH",
+        type: ActionTypes.AUTH_USER,
         payload: login
     }
 }
 
 export const saveInfoUser = (userInfo) => {
     return {
-        type: "SAVE_INFO_USER",
+        type: ActionTypes.SAVE_INFO_USER,
         payload: userInfo
     }
 }
