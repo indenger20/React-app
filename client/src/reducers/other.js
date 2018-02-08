@@ -1,7 +1,7 @@
 import Search from '../server/shared/fetch';
 import axios from 'axios';
 import * as ActionTypes from '../actions/actionTypes';
-const ROOT_URL = 'http://localhost:3090';
+const ROOT_URL = '';
 
 const initialState = {
   nav: [
@@ -14,16 +14,19 @@ const initialState = {
       "path": "/about"
     }
   ],
-  auth: null
+  auth: null,
+  users: [],
 }
 
 
 export default function otherInfo(state = initialState, action) {
   switch (action.type) {
     case ActionTypes.AUTH_USER:
-      let res = axios.post(`${ROOT_URL}/signin`, action.payload);
+      let res = axios.post(`/api/signin`, action.payload);
       return { ...state, auth: res };
-
+    case ActionTypes.NEW_USER:
+      var res = axios.post(`/api/signup`, action.payload);
+      res.then((el) => ({ ...state, users: state.users.push(el) }))
     default:
       return state;
   }

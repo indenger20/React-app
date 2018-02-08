@@ -1,15 +1,16 @@
-const Authentication = require('../controllers/authentication');
-const passportService = require('../services/passport');
-const passport = require('passport');
+const path = require('path');
+const fs = require('fs');
+const express = require('express');
+const router = express.Router();
+var usersAPI = require('../api/users');
+var config = require('../config.json');
 
-const requireAuth = passport.authenticate('jwt', {session: false});
-const requireSignIn = passport.authenticate('local', {session: false});
 
 
-module.exports = (app) => {
-  app.get(`/`, requireAuth, function (req, res) {
-    res.send({message: 'S3CR3T M3SS4G3'});
-  });
-  app.post(`/signup`, Authentication.signup);
-  app.post(`/signin`, requireSignIn, Authentication.signin);
-}
+module.exports.configure = function (app) {
+
+
+    // users routes
+    app.post('/api/signup', usersAPI.save);
+
+};

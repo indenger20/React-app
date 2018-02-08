@@ -1,6 +1,6 @@
 import * as ActionTypes from '../actions/actionTypes';
 
-const initialState = {
+const initialState2 = {
   infoUser: {
     "name": "Вероника Ростова",
     "desc": "Менеджер по продажам",
@@ -44,8 +44,16 @@ const initialState = {
   ],
 }
 
+const initialState = {
+  data: null,
+  isLoading: false,
+}
+
 
 export default function userInfo(state = initialState, action) {
+  if (!state)
+    return initialState2;
+
   switch (action.type) {
     case ActionTypes.ADD_COMMENT:
       let newCommentData = state.CommentData.slice();
@@ -54,6 +62,6 @@ export default function userInfo(state = initialState, action) {
     case ActionTypes.SAVE_INFO_USER:
       return { ...state, infoUser: action.payload };
     default:
-      return state;
+      return initialState2;
   }
 }

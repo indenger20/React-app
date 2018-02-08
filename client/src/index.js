@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import "normalize.css";
 import './assets/styles/main.css';
-import App from './containers/App';
+import App from './containers/App/App';
 import registerServiceWorker from './registerServiceWorker';
 
 import {Provider} from 'react-redux';

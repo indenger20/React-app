@@ -1,0 +1,17 @@
+{
+    "server": {
+        "tokenExpireTimeSec": 86400,
+        "httpPort": 3000,
+        "httpsPort": 443,
+        "env": "dev"
+    },
+    "mongoDB": {
+        "uri": "mongodb://localhost:27017/ReactAppDB",
+        "connectOptions": {
+            "useMongoClient": true,
+            "native_parser": true,
+            "poolSize": 1000,
+            "connectTimeoutMS": 30000
+        }
+    }
+}
