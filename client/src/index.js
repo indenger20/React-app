@@ -4,13 +4,10 @@ import ReactDOM from 'react-dom';
 import "normalize.css";
 import './assets/styles/main.css';
 import App from './containers/App/App';
-import registerServiceWorker from './registerServiceWorker';
 
-import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import rootReducer from './reducers/index';
+import { Provider } from 'react-redux';
 
-const store = createStore(rootReducer);
+import { store } from './stores/store';
 
 ReactDOM.render(
     <Provider store={store}>
@@ -19,4 +16,3 @@ ReactDOM.render(
     ,
     document.getElementById('root')
 );
-registerServiceWorker();

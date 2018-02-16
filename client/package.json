@@ -5,12 +5,14 @@
   "proxy": "http://localhost:3001/",
   "homepage": ".",
   "dependencies": {
+    "halogenium": "^2.2.3",
     "lodash.isempty": "^4.4.0",
     "react": "^16.1.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.1.0",
     "react-scripts": "1.0.17",
-    "redux-auth-wrapper": "^2.0.2"
+    "redux-auth-wrapper": "^2.0.2",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",

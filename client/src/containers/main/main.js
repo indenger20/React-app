@@ -11,9 +11,9 @@ import { addCommentAction } from '../../actions/actions';
 
 function mapStateToProps(state) {
     return {
-        infoUser: state.userInfo.infoUser,
-        InfoData: state.userInfo.InfoData,
-        CommentData: state.userInfo.CommentData
+        infoUser: state.user.infoUser,
+        InfoData: state.user.InfoData,
+        CommentData: state.user.CommentData
     }
 };
 

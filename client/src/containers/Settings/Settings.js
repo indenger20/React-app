@@ -13,7 +13,7 @@ import { Glyphicon } from 'react-bootstrap';
 
 function mapStateToProps(state) {
   return {
-    infoUser: state.userInfo.infoUser,
+    infoUser: state.user.infoUser,
   }
 };
 

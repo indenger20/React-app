@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
-import createBrowserHistory from 'history/createBrowserHistory';
-import { PropsRoute, PublicRoute, PrivateRoute } from 'react-router-with-props';
-import { userIsAdminRedir, userIsAuthenticatedRedir, userIsNotAuthenticatedRedir } from './utils/authUtils';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { PrivateRoute, CheckToAuth } from './utils/authUtils';
 import { login } from '../../actions/actions';
 
 import Main from '../Main/Main';
@@ -12,45 +10,37 @@ import LoginPage from '../Login/LoginPage';
 import Settings from '../Settings/Settings';
 import Navigation from '../../components/navigation/Navigation';
 
-
-const history = createBrowserHistory();
-
-function mapStateToProps(state) {
-    return {
-        navList: state.otherInfo.nav
-    }
-};
-
 function mapDispatchToProps(dispath) {
-    return {
-        login: () => {
-            login()
-        }
+  return {
+    login: () => {
+      // login()
     }
+  }
 };
 
 
 class App extends React.Component {
-    componentDidMount() {
-        this.props.login();
-    }
-    render() {
-        return (
-            <BrowserRouter history={history}>
-                <div className="container">
-                    <Switch>
-                        <Navigation data={this.props.navList} />
-                        <PropsRoute exact path="/" component={Main} />
-                        <PropsRoute path="/about" component={About} />
-                        <PropsRoute path="/settings" component={Settings} />
-                        <Route path="/Login" component={userIsNotAuthenticatedRedir(LoginPage)} />
-                    </Switch>
-                </div>
-            </BrowserRouter>
-        )
-    }
+  componentDidMount() {
+
+  }
+  render() {
+    return (
+
+      <BrowserRouter>
+        <div className="container">
+          <Switch>
+            {CheckToAuth() ? <Navigation data={this.props.navList} /> : null}
+            <PrivateRoute exact path="/" component={Main} />
+            <PrivateRoute path="/About" component={About} />
+            <PrivateRoute path="/Settings" component={Settings} />
+            <Route path="/Login" component={LoginPage} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    )
+  }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-    App
+export default connect(null, mapDispatchToProps)(
+  App
 );

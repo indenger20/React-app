@@ -12,7 +12,8 @@ import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
   return {
-    auth: state.otherInfo.auth
+    data: state.user.data,
+    isLoading: state.user.isLoading
   }
 };
 
@@ -36,7 +37,7 @@ class LoginPage extends React.Component {
       identifier: '',
       password: '',
       errors: {},
-      isLoading: false
+      isLoading: this.props.isLoading
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -119,7 +120,7 @@ class LoginPage extends React.Component {
               type="text"
               className="input login-form__input"
               handleChange={this.handleChange}
-              placeholder="Yaroslav"
+              placeholder="name"
               errors={errors.identifier}
             />
           </div>
@@ -130,7 +131,7 @@ class LoginPage extends React.Component {
               type="password"
               className="input login-form__input"
               handleChange={this.handleChange}
-              placeholder="123"
+              placeholder="pass"
               errors={errors.password}
             />
           </div>
@@ -156,7 +157,7 @@ class LoginPage extends React.Component {
               type="text"
               className="input login-form__input"
               handleChange={this.handleChange}
-              placeholder="Yaroslav"
+              placeholder="name"
               errors={errors.identifier}
             />
           </div>
@@ -167,7 +168,7 @@ class LoginPage extends React.Component {
               type="password"
               className="input login-form__input"
               handleChange={this.handleChange}
-              placeholder="123"
+              placeholder="pass"
               errors={errors.password}
             />
           </div>
@@ -180,7 +181,6 @@ class LoginPage extends React.Component {
   }
 
   render() {
-
     return (
       <div className="login">
         <h1>Authorization page</h1>

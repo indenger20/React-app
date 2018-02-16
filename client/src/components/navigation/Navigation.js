@@ -11,19 +11,15 @@ export default class Navigation extends React.Component {
 
             <div className="nav">
                 <ul className="nav__list">
-                    {
-                        this.props.data.map(function (el, i) {
-                            return (
-                                <li className="nav__item" key={i}>
-                                    <NavLink exact activeClassName="nav__link--active" className="nav__link" to={el.path}>{el.text}</NavLink>
-                                </li>
-                            )
-                        })
-                    }
-
+                    <li className="nav__item" key={1}>
+                        <NavLink exact activeClassName="nav__link--active" className="nav__link" to="/">Main</NavLink>
+                    </li>
+                    <li className="nav__item" key={2}>
+                        <NavLink exact activeClassName="nav__link--active" className="nav__link" to="/About">About</NavLink>
+                    </li>
                 </ul>
-                <NavLink exact activeClassName="nav__link--active" className="nav__link nav__link--settings" to="/settings">Setting</NavLink>
-                <NavLink exact activeClassName="nav__link--active" className="nav__link nav__link--log" to="/login">Войти</NavLink>
+                <NavLink exact activeClassName="nav__link--active" className="nav__link nav__link--settings" to="/Settings">Setting</NavLink>
+                <NavLink exact activeClassName="nav__link--active" className="nav__link nav__link--log" to="/Login">Войти</NavLink>
             </div>
         )
     }

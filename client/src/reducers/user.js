@@ -1,67 +1,34 @@
-import * as ActionTypes from '../actions/actionTypes';
+import * as ActionType from '../actions/actionTypes';
 
-const initialState2 = {
-  infoUser: {
-    "name": "Вероника Ростова",
-    "desc": "Менеджер по продажам",
-    "status": "Подберу для вас самые лучшие предложения. Мои услуги абсолютно бесплатны"
-  },
-  InfoData: [
-    {
-      "name": "Ручное бронирование",
-      "val": "11"
-    },
-    {
-      "name": "Пакетные туры",
-      "val": "3"
-    },
-    {
-      "name": "Отели",
-      "val": "1"
-    }
-  ],
-  CommentData: [
-    {
-      "name": "Самуил",
-      "time": "3 октября 2011",
-      "text": "Привет, Верунь! ниче себе ты крутая. фотка класс!!!! First comment "
-    },
-    {
-      "name": "Лилия Семёновна",
-      "time": "14 октября 2011",
-      "text": "Second comment Вероника, здравствуйте! Есть такой вопрос: Особый вид куниц жизненно стабилизирует кинетический момент, это и есть всемирно известный центр огранки алмазов и торговли бриллиантами?"
-    },
-    {
-      "name": "Самуил",
-      "time": "3 октября 2011",
-      "text": "Привет, Верунь! ниче себе ты крутая. фотка класс!!!! Third comment"
-    },
-    {
-      "name": "Лилия Семёновна",
-      "time": "14 октября 2011",
-      "text": "Fourth comment Вероника, здравствуйте! Есть такой вопрос: Особый вид куниц жизненно стабилизирует кинетический момент, это и есть всемирно известный центр огранки алмазов и торговли бриллиантами?"
-    }
-  ],
-}
 
 const initialState = {
   data: null,
   isLoading: false,
-}
+};
 
 
-export default function userInfo(state = initialState, action) {
+export default (state = initialState, action) => {
   if (!state)
-    return initialState2;
+    return initialState;
 
   switch (action.type) {
-    case ActionTypes.ADD_COMMENT:
-      let newCommentData = state.CommentData.slice();
-      newCommentData[newCommentData.length] = action.payload;
-      return { ...state, CommentData: newCommentData };
-    case ActionTypes.SAVE_INFO_USER:
-      return { ...state, infoUser: action.payload };
+    case ActionType.LOGGING_IN:
+      return { ...state, isLoading: true };
+    case ActionType.LOGGED_IN:
+      const user = action.payload.data;
+      if (user)
+        return {
+          ...state,
+          data: user,
+          isLoading: false,
+        };
+      else
+        window.location.href = '/login';
+      return state;
+    case ActionType.LOGGED_OUT:
+      return initialState;
     default:
-      return initialState2;
+      return state;
   }
-}
+};
+
