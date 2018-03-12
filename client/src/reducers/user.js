@@ -2,7 +2,11 @@ import * as ActionType from '../actions/actionTypes';
 
 
 const initialState = {
-  data: null,
+  data: {
+    name: null,
+    desc: null,
+    status: null,
+  },
   isLoading: false,
 };
 
@@ -14,11 +18,11 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOGGING_IN:
       return { ...state, isLoading: true };
-    case ActionType.LOGGED_IN:
-      const user = typeof action.payload.data === 'string' ? 
-        { errors: action.payload.data } : 
-        action.payload.data;
-        
+    case ActionType.LOGIN_SUCCESS:
+      const user = typeof action.payload === 'string' ? 
+        { errors: action.payload } : 
+        action.payload;
+      
       if (user)
         return {
           ...state,
@@ -30,6 +34,12 @@ export default (state = initialState, action) => {
       return state;
     case ActionType.LOGGED_OUT:
       return initialState;
+    case ActionType.LOGIN_REQUEST:
+        return state;
+    case ActionType.LOGIN_SUCCESS:
+        return state;
+    case ActionType.LOGIN_FAILURE:
+        return state;
     default:
       return state;
   }

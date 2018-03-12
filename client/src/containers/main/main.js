@@ -11,8 +11,8 @@ import { addCommentAction } from '../../actions/actions';
 
 function mapStateToProps(state) {
     return {
-        infoUser: state.user.infoUser,
-        InfoData: state.user.InfoData,
+        infoUser: state.user.data,
+        InfoData: state.user.data,
         CommentData: state.user.CommentData
     }
 };
@@ -32,10 +32,10 @@ class Main extends React.Component {
             <div className="main">
                 <div className="main__wrap">
                     <User infoUser={this.props.infoUser} />
-                    <Info data={this.props.InfoData} />
-                    <CommentsView data={this.props.CommentData} />
+                    {/* <Info data={this.props.InfoData} />
+                    <CommentsView data={this.props.CommentData} /> */}
                 </div>
-                <Write addComment={this.props.setCommentFn} />
+                {/* <Write addComment={this.props.setCommentFn} /> */}
             </div>
         )
     }

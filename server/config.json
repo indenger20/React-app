@@ -13,5 +13,8 @@
             "poolSize": 1000,
             "connectTimeoutMS": 30000
         }
+    },
+    "auth": {
+        "secret": "supersecret"
     }
 }

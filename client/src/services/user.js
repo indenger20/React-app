@@ -2,100 +2,83 @@ import decode from 'jwt-decode';
 import { Route, Redirect } from 'react-router-dom';
 import auth0 from 'auth0-js';
 import React from 'react';
-const ID_TOKEN_KEY = 'id_token';
-const ACCESS_TOKEN_KEY = 'access_token';
+import axios from 'axios';
 
-const CLIENT_ID = '{AUTH0_CLIENT_ID}';
-const CLIENT_DOMAIN = 'AUTH0_DOMAIN';
-const REDIRECT = 'YOUR_CALLBACK_URL';
-const SCOPE = 'YOUR_SCOPE';
-const AUDIENCE = 'AUDIENCE_ATTRIBUTE';
-
-var auth = new auth0.WebAuth({
-  clientID: CLIENT_ID,
-  domain: CLIENT_DOMAIN
-});
 
 export const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => (
-    isLoggedIn()
-      ? <Component {...props} />
-      : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
-  )} />
+  <Route {...rest} render={(props) => {
+    if (authHeader()) {
+      return <Component {...props} />;
+    }
+    return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+
+  }} />
 )
 
 
-export function login() {
-  auth.authorize({
-    responseType: 'token id_token',
-    redirectUri: REDIRECT,
-    audience: AUDIENCE,
-    scope: SCOPE
-  });
+export function login(newUser) {
+
+  return axios.post('/api/signin', newUser)
+    .then((response) => {
+      if (!response.data) {
+        return Promise.reject(response.statusText);
+      }
+
+      return response.data;
+    }).then(user => {
+      // login successful if there's a jwt token in the response
+
+      if (user && user.token) {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('user', JSON.stringify(user));
+      }
+
+      return user;
+    });
+
+  // auth.authorize({
+  //   responseType: 'token id_token',
+  //   redirectUri: REDIRECT,
+  //   audience: AUDIENCE,
+  //   scope: SCOPE
+  // });
+
 }
 
-export function logout() {
-  clearIdToken();
-  clearAccessToken();
-  // browserHistory.push('/');
+export function register(user) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user)
+  };
+
+  return axios('/api/signup', requestOptions).then(handleResponse);
 }
 
-export function requireAuth(nextState, replace) {
-  if (!isLoggedIn()) {
-    replace({ pathname: '/' });
+export function saveInfoUser(info) {
+  const data = {
+    user: authHeader(),
+    info
   }
+  return axios.post('/api/updInfo', data).then(handleResponse);
 }
 
-export function getIdToken() {
-  return localStorage.getItem(ID_TOKEN_KEY);
+function handleResponse(response) {
+  if (!response.ok) {
+    return Promise.reject(response.statusText);
+  }
+
+  return response.json();
 }
 
-export function getAccessToken() {
-  return localStorage.getItem(ACCESS_TOKEN_KEY);
-}
 
-function clearIdToken() {
-  localStorage.removeItem(ID_TOKEN_KEY);
-}
+export function authHeader() {
+  // return authorization header with jwt token
+  let user = JSON.parse(localStorage.getItem('user'));
 
-function clearAccessToken() {
-  localStorage.removeItem(ACCESS_TOKEN_KEY);
-}
-
-// Helper function that will allow us to extract the access_token and id_token
-function getParameterByName(name) {
-  let match = RegExp('[#&]' + name + '=([^&]*)').exec(window.location.hash);
-  return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-}
-
-// Get and store access_token in local storage
-export function setAccessToken() {
-  let accessToken = getParameterByName('access_token');
-  localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
-}
-
-// Get and store id_token in local storage
-export function setIdToken() {
-  let idToken = getParameterByName('id_token');
-  localStorage.setItem(ID_TOKEN_KEY, idToken);
-}
-
-export function isLoggedIn() {
-  const idToken = getIdToken();
-  return !!idToken && !isTokenExpired(idToken);
-}
-
-function getTokenExpirationDate(encodedToken) {
-  const token = decode(encodedToken);
-  if (!token.exp) { return null; }
-
-  const date = new Date(0);
-  date.setUTCSeconds(token.exp);
-
-  return date;
-}
-
-function isTokenExpired(token) {
-  const expirationDate = getTokenExpirationDate(token);
-  return expirationDate < new Date();
+  if (user && user.token) {
+    return user;
+  } else {
+    return false;
+  }
 }

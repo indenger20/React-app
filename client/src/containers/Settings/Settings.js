@@ -31,11 +31,9 @@ class Settings extends React.Component {
     super(props, context);
 
     this.state = {
-      name: this.props.infoUser.name,
-      desc: this.props.infoUser.desc,
-      status: this.props.infoUser.status,
+      ...this.props.infoUser,
       edit: false,
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
   }
