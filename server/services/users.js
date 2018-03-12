@@ -50,12 +50,46 @@ function authUser(user, callback) {
   })
 }
 
-function getUserById(id) {
+function getUserById(id, callback) {
+  if (!id || id == "")
+    return callback('Invalid Id.');
+  user.findById(id)
+    .populate('recruiters.recruiter', 'uid')
+    .lean()
+    .exec(function (err, user) {
+      if (user) {
+        delete user.__v;
+        return callback(user);
+      }
+    });
+}
 
+function updUserInfo(data, callback) {
+  getUserById(data._id, (user) => {
+    if (err) {
+      return callback(err);
+    }
+    if (user) {
+      user.name = data.name;
+      user.description = data.description;
+      user.status = data.status;
+      user.save(function (err, user) {
+        if (err) {
+          return callback(err, user);
+        }
+        return callback(user);
+      });
+    } else {
+      return callback('User not found.');
+    }
+  });
+
+  return callback(user);
 }
 
 Object.assign(module.exports, {
   saveUser: saveUser,
   authUser: authUser,
-  getUserById: getUserById,
+  getById: getUserById,
+  updUserInfo: updUserInfo,
 });

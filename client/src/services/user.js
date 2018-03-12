@@ -56,10 +56,11 @@ export function register(user) {
 }
 
 export function saveInfoUser(info) {
+  const user = authHeader();
   const data = {
-    user: authHeader(),
-    info
-  }
+    ...user,
+    ...info,
+  };
   return axios.post('/api/updInfo', data).then(handleResponse);
 }
 

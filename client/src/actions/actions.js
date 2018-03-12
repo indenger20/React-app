@@ -31,11 +31,19 @@ export const actionLogin = (username, password) => {
   function failure(error) { return { type: ActionTypes.LOGIN_FAILURE, payload: error } }
 }
 
-export const saveInfoUser = (user) => {
-  return {
-    type: ActionTypes.SAVE_INFO_USER,
-    payload: user
-  }
+export const saveInfoUser = (data) => {
+  return dispatch => {
+    userService.saveInfoUser(data)
+      .then(
+        user => {
+          dispatch(success(user));
+        },
+        error => {
+          // dispatch(failure(error));
+        }
+      );
+  };
+  function success(user) { return { type: ActionTypes.REGISTER_SUCCESS, user } }
 }
 
 export const actionRegistration = (newUser) => {

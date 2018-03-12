@@ -27,7 +27,7 @@ function authUser(eq, res, next) {
 
 function updInfo(eq, res, next) {
   var data = eq.body;
-  userService.updInfo(data, (e) => {
+  userService.updUserInfo(data, (e) => {
     res.send(e);
   });
 }

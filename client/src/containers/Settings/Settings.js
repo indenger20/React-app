@@ -54,7 +54,7 @@ class Settings extends React.Component {
     e.preventDefault();
     const data = {
       name: this.state.name,
-      desc: this.state.desc,
+      description: this.state.desc,
       status: this.state.status,
     }
     this.setState({
