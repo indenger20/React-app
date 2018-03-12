@@ -15,7 +15,10 @@ export default (state = initialState, action) => {
     case ActionType.LOGGING_IN:
       return { ...state, isLoading: true };
     case ActionType.LOGGED_IN:
-      const user = action.payload.data;
+      const user = typeof action.payload.data === 'string' ? 
+        { errors: action.payload.data } : 
+        action.payload.data;
+        
       if (user)
         return {
           ...state,

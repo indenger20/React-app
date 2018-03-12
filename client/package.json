@@ -5,7 +5,9 @@
   "proxy": "http://localhost:3001/",
   "homepage": ".",
   "dependencies": {
+    "auth0-js": "^9.3.0",
     "halogenium": "^2.2.3",
+    "jwt-decode": "^2.2.0",
     "lodash.isempty": "^4.4.0",
     "react": "^16.1.0",
     "react-bootstrap": "^0.32.1",

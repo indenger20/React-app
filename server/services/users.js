@@ -3,26 +3,24 @@ var config = require('../config.json');
 var fs = require('fs');
 var path = require('path');
 
-const notError = {
-  text: 'email not free'
-}
 
 function saveUser(newUser, callback) {
   const User = new user();
-  User.email = newUser.identifier;
+  User.email = newUser.email;
   User.password = newUser.password;
 
   user.find((err, users) => {
     if (err) return console.error(err);
 
-    if (users.some(u => u.email === newUser.email)) return notError;
+    if (users.some(u => u.email === newUser.email)) return callback('Email do not free');
     User.save((err, user) => {
       if (err) {
-        callback('error');
+        callback('Server error');
       }
-      callback(user)
+      callback(user);
     });
-  })
+
+  });
 };
 
 

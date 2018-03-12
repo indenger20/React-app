@@ -34,9 +34,10 @@ class LoginPage extends React.Component {
     super(props, context);
 
     this.state = {
-      identifier: '',
+      email: '',
       password: '',
       errors: {},
+      serverError: this.props.data ? this.props.data.errors : '',
       isLoading: this.props.isLoading
     }
 
@@ -55,11 +56,12 @@ class LoginPage extends React.Component {
 
   handleSubmit(e) {
     if (this.isValid()) {
-      console.log(e.target.name)
       switch (e.target.name) {
         case 'login':
           this.setState({
             errors: {},
+            email: '',
+            password: '',
             isLoading: true
           });
           this.props.authLogin(this.state);
@@ -67,6 +69,8 @@ class LoginPage extends React.Component {
         case 'registration':
           this.setState({
             errors: {},
+            email: '',
+            password: '',
             isLoading: true
           });
           this.props.registration(this.state);
@@ -85,6 +89,7 @@ class LoginPage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
     if (nextProps.auth !== this.state.auth) {
       nextProps.auth.then(
         (response) => {
@@ -92,7 +97,6 @@ class LoginPage extends React.Component {
         },
         (err) => {
           try {
-
             this.setState({
               errors: err.data.errors,
               isLoading: false
@@ -103,11 +107,16 @@ class LoginPage extends React.Component {
         }
       )
     }
+    if (nextProps.data && nextProps.data.errors !== this.state.serverError) {
+      this.setState({
+        serverError: nextProps.data.errors,
+      })
+    }
 
   }
 
   renderLogin() {
-    const { errors, identifier, password, isLoading } = this.state;
+    const { errors, email, password, isLoading } = this.state;
     return (
       <div>
         <h3>Login</h3>
@@ -115,13 +124,13 @@ class LoginPage extends React.Component {
           <div className="login-form__row">
             <Input
               classParent="default-input"
-              value={identifier}
-              name="identifier"
+              value={email}
+              name="email"
               type="text"
               className="input login-form__input"
               handleChange={this.handleChange}
               placeholder="name"
-              errors={errors.identifier}
+              errors={errors.email}
             />
           </div>
           <div className="login-form__row">
@@ -144,7 +153,7 @@ class LoginPage extends React.Component {
   }
 
   renderRegistration() {
-    const { errors, identifier, password, isLoading } = this.state;
+    const { errors, email, password, isLoading } = this.state;
     return (
       <div>
         <h3>Registration</h3>
@@ -152,13 +161,13 @@ class LoginPage extends React.Component {
           <div className="login-form__row">
             <Input
               classParent="default-input"
-              value={identifier}
-              name="identifier"
+              value={email}
+              name="email"
               type="text"
               className="input login-form__input"
               handleChange={this.handleChange}
               placeholder="name"
-              errors={errors.identifier}
+              errors={errors.email}
             />
           </div>
           <div className="login-form__row">
@@ -192,7 +201,9 @@ class LoginPage extends React.Component {
             {this.renderRegistration()}
           </Tab>
         </Tabs>
+        <span>{this.state.serverError}</span>
       </div>
+
     )
   }
 }

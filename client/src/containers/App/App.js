@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { PrivateRoute, CheckToAuth } from './utils/authUtils';
+import { PrivateRoute, isLoggedIn  } from '../../services/user';
 import { login } from '../../actions/actions';
 
 import Main from '../Main/Main';
@@ -29,7 +29,7 @@ class App extends React.Component {
       <BrowserRouter>
         <div className="container">
           <Switch>
-            {CheckToAuth() ? <Navigation data={this.props.navList} /> : null}
+            {isLoggedIn() ? <Navigation data={this.props.navList} /> : null}
             <PrivateRoute exact path="/" component={Main} />
             <PrivateRoute path="/About" component={About} />
             <PrivateRoute path="/Settings" component={Settings} />
