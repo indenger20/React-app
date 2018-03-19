@@ -13,7 +13,7 @@ export default class User extends React.Component {
                 </div>
                 <div className="user__about">
                     <span className="user__name">{this.props.infoUser.name}</span>
-                    <span className="user__desc">{this.props.infoUser.desc}</span>
+                    <span className="user__desc">{this.props.infoUser.description}</span>
                     <span className="user__status">{this.props.infoUser.status}</span>
                 </div>
             </div>

@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import * as userService from '../services';
 
+function already(user) { return { type: ActionTypes.LOGIN_ALREADY, payload: user } }
+
 export const addCommentAction = (comment) => {
   return {
     type: ActionTypes.ADD_COMMENT,
@@ -13,22 +15,26 @@ export const addCommentAction = (comment) => {
 export const actionLogin = (username, password) => {
   return dispatch => {
     dispatch(request({ username }));
+    const user = userService.authHeader();
+    if (!user) {
+      userService.login(username, password)
+        .then(
+          user => {
+            dispatch(success(user));
+            // history.push('/');
+          },
+          error => {
+            dispatch(failure(error));
+          }
+        );
+    } else {
+      dispatch(already({ data: user}))
+  }
+};
 
-    userService.login(username, password)
-      .then(
-        user => {
-          dispatch(success(user));
-          // history.push('/');
-        },
-        error => {
-          dispatch(failure(error));
-        }
-      );
-  };
-
-  function request(user) { return { type: ActionTypes.LOGIN_REQUEST, payload: user } }
-  function success(user) { return { type: ActionTypes.LOGIN_SUCCESS, payload: user } }
-  function failure(error) { return { type: ActionTypes.LOGIN_FAILURE, payload: error } }
+function request(user) { return { type: ActionTypes.LOGIN_REQUEST, payload: user } }
+function success(user) { return { type: ActionTypes.LOGIN_SUCCESS, payload: user } }
+function failure(error) { return { type: ActionTypes.LOGIN_FAILURE, payload: error } }
 }
 
 export const saveInfoUser = (data) => {
@@ -37,13 +43,14 @@ export const saveInfoUser = (data) => {
       .then(
         user => {
           dispatch(success(user));
+          dispatch(already(user))
         },
         error => {
           // dispatch(failure(error));
         }
       );
   };
-  function success(user) { return { type: ActionTypes.REGISTER_SUCCESS, user } }
+  function success(user) { return { type: ActionTypes.SAVE_INFO_USER, payload: user } }
 }
 
 export const actionRegistration = (newUser) => {
@@ -54,8 +61,10 @@ export const actionRegistration = (newUser) => {
       .then(
         user => {
           dispatch(success(user));
-          // history.push('/login');
-          // dispatch(alertActions.success('Registration successful'));
+          dispatch({
+            type: ActionTypes.LOGIN_SUCCESS,
+            payload: user.data
+          })
         },
         error => {
           dispatch(failure(error));
@@ -63,7 +72,14 @@ export const actionRegistration = (newUser) => {
       );
   };
 
-  function request(user) { return { type: ActionTypes.REGISTER_REQUEST, user } }
-  function success(user) { return { type: ActionTypes.REGISTER_SUCCESS, user } }
-  function failure(error) { return { type: ActionTypes.REGISTER_FAILURE, error } }
+  function request(user) { return { type: ActionTypes.REGISTER_REQUEST, payload: user } }
+  function success(user) { return { type: ActionTypes.REGISTER_SUCCESS, payload: user } }
+  function failure(error) { return { type: ActionTypes.REGISTER_FAILURE, payload: error } }
+}
+
+export const logOut = () => {
+  return {
+    type: ActionTypes.LOGGED_OUT,
+    payload: null
+  }
 }

@@ -5,6 +5,10 @@ var path = require('path');
 
 const jwt = require('jsonwebtoken');
 
+function removeCredential(user) {
+  delete user.password;
+  return user;
+}
 
 
 function saveUser(newUser, callback) {
@@ -21,10 +25,15 @@ function saveUser(newUser, callback) {
       if (err) {
         callback('Server error');
       }
-      var token = jwt.sign({ id: user._id }, config.auth.secret, {
-        expiresIn: 86400 // expires in 24 hours
+      let token = jwt.sign(user._id, config.auth.secret, {
+        expiresIn: 1440 // expires in 1 hour
       });
-      callback(user);
+      const model = {
+        ...user,
+        error: false,
+        token: token
+      }
+      callback(model);
     });
 
   });
@@ -42,7 +51,6 @@ function authUser(user, callback) {
     if (!user) {
       return callback({ 'message': 'User not found!' });
     }
-    console.log(user);
     let token = jwt.sign(user, config.auth.secret, {
       expiresIn: 1440 // expires in 1 hour
     });
@@ -53,9 +61,7 @@ function authUser(user, callback) {
 function getUserById(id, callback) {
   if (!id || id == "")
     return callback('Invalid Id.');
-  user.findById(id)
-    .populate('recruiters.recruiter', 'uid')
-    .lean()
+  User.findById(id)
     .exec(function (err, user) {
       if (user) {
         delete user.__v;
@@ -65,7 +71,7 @@ function getUserById(id, callback) {
 }
 
 function updUserInfo(data, callback) {
-  getUserById(data._id, (user) => {
+  getUserById(data._id, (user, err) => {
     if (err) {
       return callback(err);
     }
@@ -77,14 +83,12 @@ function updUserInfo(data, callback) {
         if (err) {
           return callback(err, user);
         }
-        return callback(user);
+        return callback(removeCredential(user));
       });
     } else {
       return callback('User not found.');
     }
   });
-
-  return callback(user);
 }
 
 Object.assign(module.exports, {

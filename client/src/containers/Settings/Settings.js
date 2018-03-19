@@ -13,7 +13,7 @@ import { Glyphicon } from 'react-bootstrap';
 
 function mapStateToProps(state) {
   return {
-    infoUser: state.user.infoUser,
+    infoUser: state.user.data,
   }
 };
 
@@ -31,7 +31,9 @@ class Settings extends React.Component {
     super(props, context);
 
     this.state = {
-      ...this.props.infoUser,
+      name: this.props.infoUser.name,
+      description: this.props.infoUser.description,
+      status: this.props.infoUser.status,
       edit: false,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -41,7 +43,13 @@ class Settings extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
-
+    if (!this.state.name && nextProps.infoUser.name) {
+      this.setState({
+        name: nextProps.infoUser.name,
+        description: nextProps.infoUser.description,
+        status: nextProps.infoUser.status,
+      })
+    }
   }
 
   handleChange(e) {
@@ -54,7 +62,7 @@ class Settings extends React.Component {
     e.preventDefault();
     const data = {
       name: this.state.name,
-      description: this.state.desc,
+      description: this.state.description,
       status: this.state.status,
     }
     this.setState({
@@ -65,7 +73,7 @@ class Settings extends React.Component {
 
 
   render() {
-    const { name, desc, status } = this.state;
+    const { name, description, status } = this.state;
     return (
       <div className="settings">
         <form className="settings__form">
@@ -88,14 +96,14 @@ class Settings extends React.Component {
                   placeholder="name"
                   errors={null}
                 />
-                <span className="settings__save" onClick={this.handleSave}><Glyphicon glyph="ok" /></span>
+                <span className="settings__save" onClick={() => this.setState({ edit: false })}><Glyphicon glyph="ok" /></span>
               </div> :
               null}
           </div>
           <div className="settings__row">
             {this.state.edit !== 'desc' ?
               <label>
-                {desc ? desc : 'Some desc'}
+                {description ? description : 'Some desc'}
                 <span onClick={() => this.setState({ edit: 'desc' })} className="settings__edit"><Glyphicon glyph="refresh" /></span>
               </label> :
               null
@@ -103,7 +111,7 @@ class Settings extends React.Component {
             {this.state.edit && this.state.edit === 'desc' ?
               <div>
                 <Input
-                  value={this.state.desc}
+                  value={this.state.description}
                   name="desc"
                   type="text"
                   className="input settings__input"
@@ -111,7 +119,7 @@ class Settings extends React.Component {
                   placeholder="desc"
                   errors={null}
                 />
-                <span className="settings__save" onClick={this.handleSave}><Glyphicon glyph="ok" /></span>
+                <span className="settings__save" onClick={() => this.setState({ edit: false })}><Glyphicon glyph="ok" /></span>
               </div> :
               null}
           </div>
@@ -134,14 +142,14 @@ class Settings extends React.Component {
                   placeholder="status"
                   errors={null}
                 />
-                <span className="settings__save" onClick={this.handleSave}><Glyphicon glyph="ok" /></span>
+                <span className="settings__save" onClick={() => this.setState({ edit: false })}><Glyphicon glyph="ok" /></span>
               </div> :
               null}
 
           </div>
-          {/* <div className="settings__row">
+          <div className="settings__row">
             <button className="btn" onClick={this.handleSave}>Save</button>
-          </div> */}
+          </div>
         </form>
       </div>
     )

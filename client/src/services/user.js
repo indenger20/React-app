@@ -46,13 +46,22 @@ export function login(newUser) {
 }
 
 export function register(user) {
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(user)
-  };
+  return axios.post('/api/signup', JSON.stringify(user))
+    .then(response => {
+      if (!response.data) {
+        return Promise.reject(response.statusText);
+      }
+      return response.data;
+    }).then(user => {
+      // login successful if there's a jwt token in the response
 
-  return axios('/api/signup', requestOptions).then(handleResponse);
+      if (user && user.token) {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('user', JSON.stringify(user));
+      }
+
+      return user;
+    });
 }
 
 export function saveInfoUser(info) {
@@ -61,11 +70,11 @@ export function saveInfoUser(info) {
     ...user,
     ...info,
   };
-  return axios.post('/api/updInfo', data).then(handleResponse);
+  return axios.post('/api/updInfo', data);
 }
 
 function handleResponse(response) {
-  if (!response.ok) {
+  if (response.statusText !== 'OK') {
     return Promise.reject(response.statusText);
   }
 
@@ -82,4 +91,19 @@ export function authHeader() {
   } else {
     return false;
   }
+}
+
+export const updateLocalSrotage = ({ data }) => {
+  const localUser = JSON.parse(localStorage.getItem('user'));
+  const model = {
+    ...localUser,
+    ...data,
+  };
+  localStorage.setItem('user', JSON.stringify(model));
+  return model;
+}
+
+export function logOut() {
+  const user = authHeader();
+  localStorage.removeItem('user');
 }

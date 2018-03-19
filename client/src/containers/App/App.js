@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { PrivateRoute, authHeader, getUser } from '../../services/user';
-import { actionLogin } from '../../actions/actions';
+import { actionLogin, logOut } from '../../actions/actions';
 
 import Main from '../Main/Main';
 import About from '../About/About';
@@ -15,6 +15,9 @@ function mapDispatchToProps(dispath) {
     login: (data) => {
       dispath(actionLogin(data))
     },
+    logOut: () => {
+      dispath(logOut())
+    }
   }
 };
 
@@ -30,7 +33,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div className="container">
-          {authHeader() ? <Navigation data={this.props.navList} /> : null}
+          {authHeader() ? <Navigation logOut={this.props.logOut} data={this.props.navList} /> : null}
           <PrivateRoute exact path="/" component={Main} />
           <PrivateRoute path="/About" component={About} />
           <PrivateRoute path="/Settings" component={Settings} />

@@ -19,7 +19,13 @@ export default class Navigation extends React.Component {
                     </li>
                 </ul>
                 <NavLink exact activeClassName="nav__link--active" className="nav__link nav__link--settings" to="/Settings">Setting</NavLink>
-                <NavLink exact activeClassName="nav__link--active" className="nav__link nav__link--log" to="/Login">Войти</NavLink>
+                <NavLink 
+                    exact 
+                    activeClassName="nav__link--active" 
+                    className="nav__link nav__link--log" 
+                    to="/" 
+                    onClick={() => this.props.logOut()}
+                >Выйти</NavLink>
             </div>
         )
     }
