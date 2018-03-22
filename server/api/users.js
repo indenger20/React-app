@@ -21,6 +21,7 @@ function getUser(eq, res, next) {
 
 function authUser(eq, res, next) {
   var user = eq.body;
+  user.headers = eq.headers;
   userService.authUser(user, (e) => {
     res.send(e);
   });

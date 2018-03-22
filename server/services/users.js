@@ -17,6 +17,7 @@ function returnInfor(user) {
     token: user.token,
     status: user.status,
     description: user.description,
+    _id: user._id,
   }
 }
 
@@ -37,7 +38,7 @@ function saveUser(newUser, callback) {
     if (err) return console.error(err);
 
     if (users.some(u => u.email === newUser.email)) return callback('Email do not free');
-    
+
     nUser.save((err, user) => {
       if (err) {
         callback('Server error');
@@ -48,21 +49,23 @@ function saveUser(newUser, callback) {
   });
 };
 
-function authUser(user, callback) {
+function authUser(param, callback) {
   let data = {
-    email: user.email,
-    password: user.password
+    email: param.email,
+    password: param.password
   };
-  User.findOne(data).lean().exec(function (err, user) {
+  User.findOne(data).exec(function (err, user) {
     if (err) {
       return callback({ error: true });
     }
     if (!user) {
       return callback({ 'message': 'User not found!' });
     }
-    let token = jwt.sign(user, config.auth.secret, {
-      expiresIn: 1440 // expires in 1 hour
-    });
+    var token = jwt.sign({
+      auth: 'magic',
+      agent: param.headers['user-agent'],
+      exp: 1440 // expires in 1 hour
+    }, config.auth.secret);
     user.token = token;
     user.save(function (err, user) {
       callback(returnInfor(user));
