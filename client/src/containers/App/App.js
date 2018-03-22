@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { PrivateRoute, authHeader, getUser } from '../../services/user';
-import { actionLogin, logOut } from '../../actions/actions';
+import { PrivateRoute, authHeader, getUser, AuthRoute } from '../../services/user';
+import { authorization, logOut } from '../../actions/actions';
 
 import Main from '../Main/Main';
 import About from '../About/About';
@@ -13,7 +13,7 @@ import Navigation from '../../components/navigation/Navigation';
 function mapDispatchToProps(dispath) {
   return {
     login: (data) => {
-      dispath(actionLogin(data))
+      dispath(authorization(data))
     },
     logOut: () => {
       dispath(logOut())
@@ -37,7 +37,7 @@ class App extends React.Component {
           <PrivateRoute exact path="/" component={Main} />
           <PrivateRoute path="/About" component={About} />
           <PrivateRoute path="/Settings" component={Settings} />
-          <Route path="/Login" component={LoginPage} />
+          <AuthRoute path="/Login" component={LoginPage} />
         </div>
       </BrowserRouter>
     )

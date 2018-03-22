@@ -43,13 +43,11 @@ class Settings extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
-    if (!this.state.name && nextProps.infoUser.name) {
-      this.setState({
-        name: nextProps.infoUser.name,
-        description: nextProps.infoUser.description,
-        status: nextProps.infoUser.status,
-      })
-    }
+    this.setState({
+      name: nextProps.infoUser.name,
+      description: nextProps.infoUser.description,
+      status: nextProps.infoUser.status,
+    })
   }
 
   handleChange(e) {
@@ -101,22 +99,22 @@ class Settings extends React.Component {
               null}
           </div>
           <div className="settings__row">
-            {this.state.edit !== 'desc' ?
+            {this.state.edit !== 'description' ?
               <label>
                 {description ? description : 'Some desc'}
-                <span onClick={() => this.setState({ edit: 'desc' })} className="settings__edit"><Glyphicon glyph="refresh" /></span>
+                <span onClick={() => this.setState({ edit: 'description' })} className="settings__edit"><Glyphicon glyph="refresh" /></span>
               </label> :
               null
             }
-            {this.state.edit && this.state.edit === 'desc' ?
+            {this.state.edit && this.state.edit === 'description' ?
               <div>
                 <Input
                   value={this.state.description}
-                  name="desc"
+                  name="description"
                   type="text"
                   className="input settings__input"
                   handleChange={this.handleChange}
-                  placeholder="desc"
+                  placeholder="description"
                   errors={null}
                 />
                 <span className="settings__save" onClick={() => this.setState({ edit: false })}><Glyphicon glyph="ok" /></span>

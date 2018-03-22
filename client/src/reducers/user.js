@@ -58,6 +58,11 @@ export default (state = initialState, action) => {
         ...state,
         data,
       };
+    case ActionType.LOGIN_AUTHORIZATION:
+      return {
+        ...state,
+        data: action.payload,
+      };
     default:
       return state;
   }

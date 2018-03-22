@@ -15,6 +15,16 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
   }} />
 )
 
+export const AuthRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={(props) => {
+    if (!authHeader()) {
+      return <Component {...props} />;
+    }
+    return <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+
+  }} />
+)
+
 
 export function login(newUser) {
 
@@ -101,6 +111,10 @@ export const updateLocalSrotage = ({ data }) => {
   };
   localStorage.setItem('user', JSON.stringify(model));
   return model;
+}
+
+export const authorization = (data) => {
+  return axios.post('/api/auth', JSON.stringify(data));
 }
 
 export function logOut() {

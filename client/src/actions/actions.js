@@ -28,13 +28,31 @@ export const actionLogin = (username, password) => {
           }
         );
     } else {
-      dispatch(already({ data: user}))
-  }
-};
+      dispatch(already({ data: user }))
+    }
+  };
 
-function request(user) { return { type: ActionTypes.LOGIN_REQUEST, payload: user } }
-function success(user) { return { type: ActionTypes.LOGIN_SUCCESS, payload: user } }
-function failure(error) { return { type: ActionTypes.LOGIN_FAILURE, payload: error } }
+  function request(user) { return { type: ActionTypes.LOGIN_REQUEST, payload: user } }
+  function success(user) { return { type: ActionTypes.LOGIN_SUCCESS, payload: user } }
+  function failure(error) { return { type: ActionTypes.LOGIN_FAILURE, payload: error } }
+}
+
+export const authorization = (user) => {
+  return dispatch => {
+    userService.authorization(user)
+      .then(
+        user => {
+          dispatch({
+            type: ActionTypes.LOGIN_AUTHORIZATION,
+            payload: user.data
+          });
+        },
+        error => {
+          dispatch(failure(error));
+        }
+      );
+  };
+  function failure(error) { return { type: ActionTypes.LOGIN_FAILURE, payload: error } }
 }
 
 export const saveInfoUser = (data) => {

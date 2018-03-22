@@ -13,5 +13,5 @@ module.exports.configure = function (app) {
     app.post('/api/signup', usersAPI.save);
     app.post('/api/signin', usersAPI.authUser);
     app.post('/api/updInfo', usersAPI.updInfo);
-
+    app.post('/api/auth', usersAPI.authByToken);
 };
