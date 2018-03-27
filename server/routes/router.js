@@ -3,6 +3,7 @@ const fs = require('fs');
 const express = require('express');
 const router = express.Router();
 var usersAPI = require('../api/users');
+var  docuemntApi = require('../api/documentApi');
 var config = require('../config.json');
 
 
@@ -14,4 +15,7 @@ module.exports.configure = function (app) {
     app.post('/api/signin', usersAPI.authUser);
     app.post('/api/updInfo', usersAPI.updInfo);
     app.post('/api/auth', usersAPI.authByToken);
+
+    // main routes
+    app.post('/api/users', docuemntApi.getUsers);
 };

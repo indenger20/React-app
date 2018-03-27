@@ -1,5 +1,5 @@
 import * as ActionType from '../actions/actionTypes';
-import * as userService from '../services';
+import * as userService from '../services/user';
 
 const initialState = {
   data: {
@@ -36,6 +36,8 @@ export default (state = initialState, action) => {
     case ActionType.LOGIN_REQUEST:
       return state;
     case ActionType.LOGIN_FAILURE:
+      userService.logOut();
+      window.location.href = '/';
       return state;
     case ActionType.LOGIN_ALREADY:
       if (!action.payload) {

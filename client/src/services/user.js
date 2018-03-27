@@ -117,7 +117,7 @@ export const authorization = (data) => {
   return axios.post('/api/auth', JSON.stringify(data));
 }
 
-export function logOut() {
+export const logOut = () => {
   const user = authHeader();
   localStorage.removeItem('user');
 }

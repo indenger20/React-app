@@ -32,6 +32,9 @@ function saveUser(newUser, callback) {
     email: newUser.email,
     password: newUser.password,
     token: token,
+    name: 'unknown',
+    status: 'unknown',
+    description: 'unknown',
   });
 
   User.find((err, users) => {
@@ -75,12 +78,14 @@ function authUser(param, callback) {
 
 function getUserById(id, callback) {
   if (!id || id == "")
-    return callback('Invalid Id.');
+    return callback(null, 'Invalid Id.');
   User.findById(id)
     .exec(function (err, user) {
       if (user) {
         delete user.__v;
         return callback(user);
+      } else {
+        return callback(null, 'User not found.');
       }
     });
 }
@@ -115,8 +120,10 @@ function authByToken(data, callback) {
       if (user.token === data.token) {
         return callback(returnInfor(user));
       } else {
-        return callback(null);
+        return callback(null ,'!!!');
       }
+    } else {
+      return callback(null, 'User not found.');
     }
   });
 }

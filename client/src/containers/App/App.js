@@ -5,7 +5,7 @@ import { PrivateRoute, authHeader, getUser, AuthRoute } from '../../services/use
 import { authorization, logOut } from '../../actions/actions';
 
 import Main from '../Main/Main';
-import About from '../About/About';
+import Search from '../Search/Search';
 import LoginPage from '../Login/LoginPage';
 import Settings from '../Settings/Settings';
 import Navigation from '../../components/navigation/Navigation';
@@ -35,7 +35,7 @@ class App extends React.Component {
         <div className="container">
           {authHeader() ? <Navigation logOut={this.props.logOut} data={this.props.navList} /> : null}
           <PrivateRoute exact path="/" component={Main} />
-          <PrivateRoute path="/About" component={About} />
+          <PrivateRoute path="/Search" component={Search} />
           <PrivateRoute path="/Settings" component={Settings} />
           <AuthRoute path="/Login" component={LoginPage} />
         </div>

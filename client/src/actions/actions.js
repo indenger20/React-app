@@ -1,7 +1,7 @@
 import * as ActionTypes from './actionTypes';
-import axios from 'axios';
 
-import * as userService from '../services';
+import * as userService from '../services/user';
+import * as documentServise from '../services/document';
 
 function already(user) { return { type: ActionTypes.LOGIN_ALREADY, payload: user } }
 
@@ -42,10 +42,14 @@ export const authorization = (user) => {
     userService.authorization(user)
       .then(
         user => {
-          dispatch({
-            type: ActionTypes.LOGIN_AUTHORIZATION,
-            payload: user.data
-          });
+          if (typeof user.data !== 'string') {
+            dispatch({
+              type: ActionTypes.LOGIN_AUTHORIZATION,
+              payload: user.data
+            });
+          } else {
+            dispatch(failure(user));
+          }
         },
         error => {
           dispatch(failure(error));
@@ -100,4 +104,21 @@ export const logOut = () => {
     type: ActionTypes.LOGGED_OUT,
     payload: null
   }
+}
+
+export const getUsers = (string) => {
+  return dispatch => {
+    documentServise.getUsers(string)
+      .then(
+        users => {
+          dispatch({
+            type: ActionTypes.GET_USERS,
+            payload: users,
+          });
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  };
 }
