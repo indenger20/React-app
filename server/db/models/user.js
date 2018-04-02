@@ -8,6 +8,7 @@ const UserSchema = new Schema({
     name: { type: String },
     description: { type: String },
     status: { type: String },
+    photo: { type: String },
     token: { type: String },
 });
 

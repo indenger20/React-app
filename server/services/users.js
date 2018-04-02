@@ -17,6 +17,7 @@ function returnInfor(user) {
     token: user.token,
     status: user.status,
     description: user.description,
+    photo: user.photo,
     _id: user._id,
   }
 }
@@ -34,6 +35,7 @@ function saveUser(newUser, callback) {
     token: token,
     name: 'unknown',
     status: 'unknown',
+    photo: 'unknown',
     description: 'unknown',
   });
 
@@ -99,6 +101,7 @@ function updUserInfo(data, callback) {
       user.name = data.name;
       user.description = data.description;
       user.status = data.status;
+      user.photo = data.photo;
       user.save(function (err, user) {
         if (err) {
           return callback(err, user);

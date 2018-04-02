@@ -35,6 +35,7 @@ class Settings extends React.Component {
       description: this.props.infoUser.description,
       status: this.props.infoUser.status,
       edit: false,
+      photo: this.props.infoUser.photo,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -71,11 +72,13 @@ class Settings extends React.Component {
 
 
   render() {
-    const { name, description, status } = this.state;
+    const { name, description, status, photo } = this.state;
+    const defaultPhoto = require('../../assets/images/users/user-1.png');
     return (
       <div className="settings">
         <form className="settings__form">
           <div className="settings__row">
+            <span className="settings__label">Your Name</span>
             {this.state.edit !== 'name' ?
               <label>
                 {name ? name : 'Some Name'}
@@ -99,6 +102,7 @@ class Settings extends React.Component {
               null}
           </div>
           <div className="settings__row">
+            <span className="settings__label">Your Description</span>
             {this.state.edit !== 'description' ?
               <label>
                 {description ? description : 'Some desc'}
@@ -122,6 +126,7 @@ class Settings extends React.Component {
               null}
           </div>
           <div className="settings__row">
+            <span className="settings__label">Your Status</span>
             {this.state.edit !== 'status' ?
               <label>
                 {status ? status : 'Some status'}
@@ -143,7 +148,10 @@ class Settings extends React.Component {
                 <span className="settings__save" onClick={() => this.setState({ edit: false })}><Glyphicon glyph="ok" /></span>
               </div> :
               null}
-
+          </div>
+          <div className="settings__row">
+            <img className="setting__avatar" src={photo && photo !== 'unknown' ? require(photo) : defaultPhoto} />
+            <input type="file" />
           </div>
           <div className="settings__row">
             <button className="btn" onClick={this.handleSave}>Save</button>

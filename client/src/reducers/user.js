@@ -6,6 +6,7 @@ const initialState = {
     name: null,
     desc: null,
     status: null,
+    photo: null,
   },
   isLoading: false,
 };
